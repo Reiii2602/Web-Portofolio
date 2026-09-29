@@ -112,14 +112,14 @@ export default function Pet() {
       onClick={handleClick}
       title="Hi! Click me 👋"
     >
-      <svg
-        width="64"
-        height="60"
-        viewBox="0 0 64 60"
-        fill="none"
-        className={`pet-body${jump ? ' pet-jump' : ''}`}
-      >
-        <g className={dir === -1 ? 'pet-flipped' : ''} style={{ transformOrigin: '32px 30px' }}>
+      <div className={`pet-jump-wrap${jump ? ' pet-jump' : ''}`} style={{ display: 'inline-block' }}>
+        <svg
+          width="64"
+          height="60"
+          viewBox="0 0 64 60"
+          fill="none"
+          className={`pet-body${dir === -1 ? ' pet-flipped' : ''}`}
+        >
           {/* Shadow */}
           <ellipse cx="32" cy="58" rx="20" ry="2.5" fill="#0002" />
 
@@ -137,38 +137,38 @@ export default function Pet() {
           {/* Body */}
           <ellipse cx="32" cy="28" rx="22" ry="22" fill="#1a1a1a" />
 
-          {/* Eyes */}
+          {/* Eyes (Symmetric, looking right by default) */}
           {blink ? (
             <>
-              <line x1="18" y1="24" x2="26" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="34" y1="24" x2="42" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="16" y1="24" x2="24" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="40" y1="24" x2="48" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
             </>
           ) : (
             <>
-              {/* White part */}
-              <ellipse cx="22" cy="23" rx="6" ry="6.5" fill="#fff" />
-              <ellipse cx="38" cy="23" rx="6" ry="6.5" fill="#fff" />
-              {/* Pupils - face right by default */}
-              <circle cx="24" cy="24" r="3" fill="#1a1a1a" />
-              <circle cx="40" cy="24" r="3" fill="#1a1a1a" />
+              {/* White part (Centers: 20 and 44) */}
+              <ellipse cx="20" cy="23" rx="6" ry="6.5" fill="#fff" />
+              <ellipse cx="44" cy="23" rx="6" ry="6.5" fill="#fff" />
+              {/* Pupils (Centers: 22 and 46) */}
+              <circle cx="22" cy="24" r="3" fill="#1a1a1a" />
+              <circle cx="46" cy="24" r="3" fill="#1a1a1a" />
               {/* Shine */}
-              <circle cx="23" cy="22" r="1.2" fill="#fff" />
-              <circle cx="39" cy="22" r="1.2" fill="#fff" />
+              <circle cx="21" cy="22" r="1.2" fill="#fff" />
+              <circle cx="45" cy="22" r="1.2" fill="#fff" />
             </>
           )}
 
-          {/* Mouth */}
+          {/* Mouth (Center: 32) */}
           {jump ? (
-            <path d="M 26 33 Q 30 38 34 33" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
+            <path d="M 28 33 Q 32 38 36 33" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
           ) : (
-            <path d="M 28 33 Q 30 35 32 33" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+            <path d="M 30 33 Q 32 35 34 33" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
           )}
 
-          {/* Blush */}
-          <circle cx="13" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
-          <circle cx="47" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
-        </g>
-      </svg>
+          {/* Blush (Centers: 12 and 52) */}
+          <circle cx="12" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
+          <circle cx="52" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
+        </svg>
+      </div>
 
       {/* Wave on click */}
       {jump && <span className="pet-emoji">👋</span>}
