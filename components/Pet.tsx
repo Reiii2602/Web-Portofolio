@@ -5,8 +5,11 @@ import { useState, useEffect, useRef } from 'react'
 const PET_W = 64
 
 export default function Pet() {
+  const petWrapRef = useRef<HTMLDivElement>(null)
   const posRef = useRef(80)
-  const [pos, setPos] = useState(80)
+  const dirRef = useRef(1)
+  const isWalkingRef = useRef(false)
+
   const [dir, setDir] = useState(1)
   const [isWalking, setIsWalking] = useState(false)
   const [blink, setBlink] = useState(false)
@@ -26,12 +29,12 @@ export default function Pet() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  // Blinking loop
+  // Eye Blink loop - made much less frequent
   useEffect(() => {
     mounted.current = true
     const blinkLoop = () => {
       if (!mounted.current) return
-      const delay = 2000 + Math.random() * 2500
+      const delay = 4000 + Math.random() * 5000 // blink every 4-9 seconds
       setTimeout(() => {
         if (!mounted.current) return
         setBlink(true)
@@ -46,7 +49,7 @@ export default function Pet() {
     return () => { mounted.current = false }
   }, [])
 
-  // Movement loop (RAF for smooth 60fps tracking)
+  // Movement loop (RAF with direct DOM updates to prevent React flickering)
   useEffect(() => {
     let active = true
     let frameId: number
@@ -82,12 +85,20 @@ export default function Pet() {
       }
 
       const dist = targetX - posRef.current
-      const speed = isMouseActive ? 1.8 : 0.8 // Normal, relaxed pace
+      const speed = isMouseActive ? 1.8 : 0.8 // Normal pace
 
+      // Use hysteresis (deadzone) to prevent jittering
       if (Math.abs(dist) > 20) {
-        setIsWalking(true)
+        if (!isWalkingRef.current) {
+          isWalkingRef.current = true
+          setIsWalking(true)
+        }
         const newDir = dist > 0 ? 1 : -1
-        setDir(newDir)
+        if (newDir !== dirRef.current) {
+          dirRef.current = newDir
+          setDir(newDir)
+        }
+
         posRef.current += newDir * speed
 
         // Bounds check
@@ -95,9 +106,15 @@ export default function Pet() {
         if (posRef.current < 5) posRef.current = 5
         if (posRef.current > maxW - 5) posRef.current = maxW - 5
 
-        setPos(posRef.current)
-      } else {
-        setIsWalking(false)
+        // Direct DOM update avoids triggering 60fps React re-renders (which caused flickering/ngeblink)
+        if (petWrapRef.current) {
+          petWrapRef.current.style.left = `${posRef.current}px`
+        }
+      } else if (Math.abs(dist) < 5) { // Stop fully only when very close
+        if (isWalkingRef.current) {
+          isWalkingRef.current = false
+          setIsWalking(false)
+        }
       }
 
       frameId = requestAnimationFrame(loop)
@@ -117,8 +134,9 @@ export default function Pet() {
 
   return (
     <div
+      ref={petWrapRef}
       className="pet-wrap"
-      style={{ left: `${pos}px` }}
+      style={{ left: '80px' }}
       onClick={handleClick}
       title="Hi! Click me 👋"
     >
@@ -147,7 +165,7 @@ export default function Pet() {
           {/* Body */}
           <ellipse cx="32" cy="28" rx="22" ry="22" fill="#1a1a1a" />
 
-          {/* Eyes (Perfectly centered like original, looking right) */}
+          {/* Eyes (Perfectly centered, looking right) */}
           {blink ? (
             <>
               <line x1="20" y1="24" x2="28" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
