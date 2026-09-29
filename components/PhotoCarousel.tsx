@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 const photos = [
   { src: '/photo-1.jpg', alt: 'Daffa Fadhul Rahman - Photo 1' },
@@ -8,24 +8,46 @@ const photos = [
 ]
 
 export default function PhotoCarousel() {
-  const [current, setCurrent] = useState(0)
+  const [stack, setStack] = useState([0, 1]) // [back, front]
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const stackRef = useRef<HTMLDivElement>(null)
 
   const handleClick = () => {
-    setCurrent((prev) => (prev + 1) % photos.length)
+    if (isAnimating) return
+    setIsAnimating(true)
+
+    // After the CSS animation completes (~600ms), swap the stack order
+    setTimeout(() => {
+      setStack((prev) => {
+        // Move back card to front: [back, front] -> [front, back]
+        return [prev[1], prev[0]]
+      })
+      setIsAnimating(false)
+      setHovered(false)
+    }, 600)
   }
 
-  const backIndex = current
-  const frontIndex = (current + 1) % photos.length
-
   return (
-    <div className="photo-stack" onClick={handleClick} role="button" tabIndex={0} aria-label="Click to see next photo">
-      {/* Back photo - straight */}
-      <div className="photo-card photo-back">
-        <img src={photos[backIndex].src} alt={photos[backIndex].alt} />
+    <div
+      className="photo-stack"
+      ref={stackRef}
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      aria-label="Click to shuffle photos"
+    >
+      {/* Back photo - straight, peeks on hover */}
+      <div
+        className={`photo-card photo-back ${hovered ? 'photo-peek' : ''} ${isAnimating ? 'photo-lift' : ''}`}
+        onMouseEnter={() => !isAnimating && setHovered(true)}
+        onMouseLeave={() => !isAnimating && setHovered(false)}
+      >
+        <img src={photos[stack[0]].src} alt={photos[stack[0]].alt} draggable={false} />
       </div>
       {/* Front photo - tilted */}
-      <div className="photo-card photo-front">
-        <img src={photos[frontIndex].src} alt={photos[frontIndex].alt} />
+      <div className={`photo-card photo-front ${isAnimating ? 'photo-settle' : ''}`}>
+        <img src={photos[stack[1]].src} alt={photos[stack[1]].alt} draggable={false} />
       </div>
     </div>
   )
