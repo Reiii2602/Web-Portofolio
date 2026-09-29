@@ -82,7 +82,7 @@ export default function Pet() {
       }
 
       const dist = targetX - posRef.current
-      const speed = isMouseActive ? 3.5 : 1.5 // Run faster to cursor
+      const speed = isMouseActive ? 1.8 : 0.8 // Normal, relaxed pace
 
       if (Math.abs(dist) > 20) {
         setIsWalking(true)

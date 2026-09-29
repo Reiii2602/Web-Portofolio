@@ -93,8 +93,8 @@ em { font-family: var(--font-serif); font-weight: 400; }
 .pet-body { display: block; overflow: visible; }
 .pet-flipped { transform: scaleX(-1); }
 /* Legs walking */
-.pet-leg-l { animation: legL 0.35s ease-in-out infinite; transform-origin: 22px 48px; }
-.pet-leg-r { animation: legR 0.35s ease-in-out infinite; transform-origin: 42px 48px; }
+.pet-leg-l { animation: legL 0.45s ease-in-out infinite; transform-origin: 22px 48px; }
+.pet-leg-r { animation: legR 0.45s ease-in-out infinite; transform-origin: 42px 48px; }
 @keyframes legL {
   0%, 100% { transform: rotate(-12deg) translateY(-2px); }
   50% { transform: rotate(12deg) translateY(1px); }
