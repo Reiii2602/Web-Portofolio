@@ -89,14 +89,14 @@ em { font-family: var(--font-serif); font-weight: 400; }
 .contact-section { padding: 110px 0 130px; border-top: 1px solid var(--foreground); }.contact-section h2 { font-size: clamp(4rem, 9vw, 9rem); margin: 55px 0 76px; }.contact-email { display: inline-flex; border-bottom: 1px solid var(--foreground); padding-bottom: 8px; font-size: 18px; }
 .site-footer { display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding: 22px 0 30px; color: var(--muted-foreground); font-size: 11px; }.site-footer div { display: flex; gap: 24px; }
 /* Pet */
-.pet-wrap { position: fixed; bottom: 0; z-index: 90; cursor: pointer; transition: left 0.02s linear; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); }
+.pet-wrap { position: fixed; bottom: -2px; z-index: 90; cursor: pointer; transition: left 0.02s linear; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); }
 .pet-body { display: block; overflow: visible; }
 .pet-flipped { transform: scaleX(-1); }
 .pet-wrap:hover .pet-body { transform: translateY(-3px); transition: transform 0.25s ease; }
 .pet-wrap:hover .pet-flipped { transform: scaleX(-1) translateY(-3px); }
 /* Legs walking */
 .pet-leg-l { animation: legL 0.35s ease-in-out infinite; transform-origin: 22px 48px; }
-.pet-leg-r { animation: legR 0.35s ease-in-out infinite; transform-origin: 40px 48px; }
+.pet-leg-r { animation: legR 0.35s ease-in-out infinite; transform-origin: 42px 48px; }
 @keyframes legL {
   0%, 100% { transform: rotate(-12deg) translateY(-2px); }
   50% { transform: rotate(12deg) translateY(1px); }
@@ -124,5 +124,5 @@ em { font-family: var(--font-serif); font-weight: 400; }
   80% { transform: translateY(-14px) rotate(-5deg); opacity: 1; }
   100% { transform: translateY(-24px); opacity: 0; }
 }
-@media (max-width: 700px) { .site-header, .section-shell, .site-footer { width: min(100% - 32px, 1240px); }.site-header { height: 56px; }.header-left { gap: 10px; }.lang-switch { font-size: 10px; gap: 5px; }.desktop-nav { display: none; }.header-link { font-size: 11px; }.hero { min-height: 610px; padding-top: 64px; padding-bottom: 52px; }.hero-bottom, .about-grid { grid-template-columns: 1fr; gap: 28px; }.availability { text-align: left; }.hero-actions { flex-wrap: wrap; }.section-heading { display: block; }.section-note { margin-top: 10px; }.work-section, .about-section { padding-top: 72px; }.project-visual { height: 300px; }.project-meta { grid-template-columns: 28px 1fr 20px; }.project-year { display: none; }.photo-stack { width: 200px; height: 270px; }.photo-card { width: 165px; height: 225px; padding: 8px 8px 24px; }.principles { grid-template-columns: 1fr; gap: 30px; margin-top: 64px; }.principle h3 { margin-top: 14px; }.contact-section { padding: 74px 0 90px; }.contact-section h2 { margin: 40px 0 55px; }.site-footer { display: block; }.site-footer div { margin-top: 18px; gap: 16px; }.pet-container { bottom: 0; } }
+@media (max-width: 700px) { .site-header, .section-shell, .site-footer { width: min(100% - 32px, 1240px); }.site-header { height: 56px; }.header-left { gap: 10px; }.lang-switch { font-size: 10px; gap: 5px; }.desktop-nav { display: none; }.header-link { font-size: 11px; }.hero { min-height: 610px; padding-top: 64px; padding-bottom: 52px; }.hero-bottom, .about-grid { grid-template-columns: 1fr; gap: 28px; }.availability { text-align: left; }.hero-actions { flex-wrap: wrap; }.section-heading { display: block; }.section-note { margin-top: 10px; }.work-section, .about-section { padding-top: 72px; }.project-visual { height: 300px; }.project-meta { grid-template-columns: 28px 1fr 20px; }.project-year { display: none; }.photo-stack { width: 200px; height: 270px; }.photo-card { width: 165px; height: 225px; padding: 8px 8px 24px; }.principles { grid-template-columns: 1fr; gap: 30px; margin-top: 64px; }.principle h3 { margin-top: 14px; }.contact-section { padding: 74px 0 90px; }.contact-section h2 { margin: 40px 0 55px; }.site-footer { display: block; }.site-footer div { margin-top: 18px; gap: 16px; }.pet-wrap { bottom: -2px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }

@@ -120,17 +120,17 @@ export default function Pet() {
         className={`pet-body${dir === -1 ? ' pet-flipped' : ''}${jump ? ' pet-jump' : ''}`}
       >
         {/* Shadow */}
-        <ellipse cx="32" cy="57" rx="18" ry="3" fill="#0002" />
+        <ellipse cx="32" cy="58" rx="20" ry="2.5" fill="#0002" />
 
         {/* Left leg */}
         <g className={isWalking ? 'pet-leg-l' : ''}>
-          <rect x="17" y="42" width="10" height="12" rx="5" fill="#1a1a1a" />
-          <ellipse cx="22" cy="54" rx="6" ry="3" fill="#1a1a1a" />
+          <rect x="16" y="42" width="12" height="14" rx="5" fill="#1a1a1a" />
+          <ellipse cx="22" cy="55" rx="7.5" ry="4.5" fill="#1a1a1a" />
         </g>
         {/* Right leg */}
         <g className={isWalking ? 'pet-leg-r' : ''}>
-          <rect x="35" y="42" width="10" height="12" rx="5" fill="#1a1a1a" />
-          <ellipse cx="40" cy="54" rx="6" ry="3" fill="#1a1a1a" />
+          <rect x="36" y="42" width="12" height="14" rx="5" fill="#1a1a1a" />
+          <ellipse cx="42" cy="55" rx="7.5" ry="4.5" fill="#1a1a1a" />
         </g>
 
         {/* Body */}
