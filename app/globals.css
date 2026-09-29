@@ -26,9 +26,9 @@ a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
 .site-header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; height: 88px; border-bottom: 1px solid var(--border); background: rgba(247,247,245,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: background-color 0.3s ease, border-color 0.3s ease; }
 .dark .site-header { background: rgba(17,17,17,.85); }
 .header-left { display: flex; align-items: baseline; gap: 14px; }
-.theme-toggle { background: none; border: none; padding: 0 0 0 10px; cursor: pointer; color: var(--muted-foreground); display: flex; align-items: baseline; transition: color 0.2s ease; }
+.theme-toggle { background: none; border: none; padding: 0 0 0 10px; cursor: pointer; color: var(--muted-foreground); display: flex; align-items: center; justify-content: center; transition: color 0.2s ease; }
 .theme-toggle:hover { color: var(--foreground); }
-.theme-toggle svg { width: 14px; height: 14px; }
+.theme-toggle svg { width: 14px; height: 14px; transform: translateY(2px); }
 .lang-switch { display: flex; align-items: baseline; gap: 6px; background: none; border: none; padding: 0; cursor: pointer; font-size: 12px; font-weight: 700; font-family: inherit; letter-spacing: .08em; color: var(--muted-foreground); }
 .lang-switch:hover { color: var(--foreground); }
 .lang-divider { display: none; }
