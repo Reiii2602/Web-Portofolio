@@ -3,6 +3,7 @@
 import PhotoCarousel from '@/components/PhotoCarousel'
 import Pet from '@/components/Pet'
 import SocialSidebar from '@/components/SocialSidebar'
+import MusicDropdown from '@/components/MusicDropdown'
 import { LangProvider, useLang } from '@/components/LangContext'
 
 const projects = [
@@ -52,6 +53,7 @@ function PageContent() {
           <a href="#work">{t.work}</a>
           <a href="#about">{t.about}</a>
           <a href="#contact">{t.contact}</a>
+          <MusicDropdown />
         </nav>
         <a className="header-link" href="#" onClick={(e) => e.preventDefault()}>{t.letsTalk} <span aria-hidden="true">↗</span></a>
       </header>

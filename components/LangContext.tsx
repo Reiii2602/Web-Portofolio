@@ -10,6 +10,8 @@ const translations = {
     work: 'Work',
     about: 'About',
     contact: 'Contact',
+    music: 'Music',
+    musicPlaceholder: 'Paste Spotify link...',
     letsTalk: "Let's talk",
     // Hero
     heroKicker: 'SIJA Student · SMKN 2 Yogyakarta',
@@ -49,6 +51,8 @@ const translations = {
     work: 'Karya',
     about: 'Tentang',
     contact: 'Kontak',
+    music: 'Musik',
+    musicPlaceholder: 'Tempel link Spotify...',
     letsTalk: 'Hubungi',
     // Hero
     heroKicker: 'Siswa SIJA · SMKN 2 Yogyakarta',
