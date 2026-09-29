@@ -5,12 +5,26 @@ import { useState, useEffect, useRef } from 'react'
 const PET_W = 64
 
 export default function Pet() {
+  const posRef = useRef(80)
   const [pos, setPos] = useState(80)
   const [dir, setDir] = useState(1)
   const [isWalking, setIsWalking] = useState(false)
   const [blink, setBlink] = useState(false)
   const [jump, setJump] = useState(false)
+
+  const targetXRef = useRef<number | null>(null)
+  const lastMouseTimeRef = useRef<number>(0)
   const mounted = useRef(true)
+
+  // Mouse tracker
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      targetXRef.current = e.clientX
+      lastMouseTimeRef.current = Date.now()
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
   // Blinking loop
   useEffect(() => {
@@ -32,71 +46,67 @@ export default function Pet() {
     return () => { mounted.current = false }
   }, [])
 
-  // Walking behavior loop
+  // Movement loop (RAF for smooth 60fps tracking)
   useEffect(() => {
     let active = true
-    let walkInterval: ReturnType<typeof setInterval> | null = null
+    let frameId: number
+    let currentMode: 'roam' | 'follow' = 'roam'
+    let roamTarget = posRef.current
 
-    const stopWalk = () => {
-      if (walkInterval) clearInterval(walkInterval)
-      walkInterval = null
-      if (active) setIsWalking(false)
-    }
-
-    const startWalk = () => {
-      const newDir = Math.random() > 0.5 ? 1 : -1
-      if (active) {
-        setDir(newDir)
-        setIsWalking(true)
-      }
-
-      walkInterval = setInterval(() => {
-        if (!active) { stopWalk(); return }
-        setPos((prev) => {
-          const maxX = typeof window !== 'undefined' ? window.innerWidth - PET_W - 10 : 400
-          const next = prev + newDir * 1.5
-          if (next < 10 || next > maxX) {
-            stopWalk()
-            return prev
-          }
-          return next
-        })
-      }, 25)
-    }
-
-    const behaviorLoop = () => {
+    const loop = () => {
       if (!active) return
 
-      const rand = Math.random()
-      if (rand < 0.85) {
-        // Walk often for 3-6 seconds
-        startWalk()
-        const walkDuration = 3000 + Math.random() * 3000
-        setTimeout(() => {
-          stopWalk()
-          // Short idle between walks (0.5-2 seconds)
-          const idleDuration = 500 + Math.random() * 1500
-          setTimeout(() => {
-            if (active) behaviorLoop()
-          }, idleDuration)
-        }, walkDuration)
+      const now = Date.now()
+      // If mouse moved in the last 5 seconds, follow it!
+      const isMouseActive = now - lastMouseTimeRef.current < 5000 && targetXRef.current !== null
+
+      let targetX = roamTarget
+
+      if (isMouseActive) {
+        currentMode = 'follow'
+        targetX = targetXRef.current! - PET_W / 2 // Center pet on cursor
       } else {
-        // Idle occasionally for 1-3 seconds
-        stopWalk()
-        const idleDuration = 1000 + Math.random() * 2000
-        setTimeout(() => {
-          if (active) behaviorLoop()
-        }, idleDuration)
+        if (currentMode === 'follow') {
+          currentMode = 'roam'
+          roamTarget = posRef.current
+        }
+        // Random roam logic
+        if (Math.random() < 0.015) {
+          if (Math.random() < 0.6) {
+            const maxW = typeof window !== 'undefined' ? window.innerWidth - PET_W : 400
+            roamTarget = Math.max(10, Math.min(maxW, posRef.current + (Math.random() * 400 - 200)))
+          } else {
+            roamTarget = posRef.current
+          }
+        }
       }
+
+      const dist = targetX - posRef.current
+      const speed = isMouseActive ? 3.5 : 1.5 // Run faster to cursor
+
+      if (Math.abs(dist) > 20) {
+        setIsWalking(true)
+        const newDir = dist > 0 ? 1 : -1
+        setDir(newDir)
+        posRef.current += newDir * speed
+
+        // Bounds check
+        const maxW = typeof window !== 'undefined' ? window.innerWidth - PET_W : 400
+        if (posRef.current < 5) posRef.current = 5
+        if (posRef.current > maxW - 5) posRef.current = maxW - 5
+
+        setPos(posRef.current)
+      } else {
+        setIsWalking(false)
+      }
+
+      frameId = requestAnimationFrame(loop)
     }
 
-    // Start after a short delay
-    const startTimer = setTimeout(behaviorLoop, 500)
-
+    frameId = requestAnimationFrame(loop)
     return () => {
       active = false
-      clearTimeout(startTimer)
-      stopWalk()
+      cancelAnimationFrame(frameId)
     }
   }, [])
 
@@ -137,36 +147,36 @@ export default function Pet() {
           {/* Body */}
           <ellipse cx="32" cy="28" rx="22" ry="22" fill="#1a1a1a" />
 
-          {/* Eyes (Looking right: entire face shifted +2px right) */}
+          {/* Eyes (Perfectly centered like original, looking right) */}
           {blink ? (
             <>
-              <line x1="18" y1="24" x2="26" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="42" y1="24" x2="50" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="20" y1="24" x2="28" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="36" y1="24" x2="44" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
             </>
           ) : (
             <>
-              {/* White part (Centers: 22 and 46) */}
-              <ellipse cx="22" cy="23" rx="6" ry="6.5" fill="#fff" />
-              <ellipse cx="46" cy="23" rx="6" ry="6.5" fill="#fff" />
-              {/* Pupils (Centers: 24 and 48) */}
-              <circle cx="24" cy="24" r="3" fill="#1a1a1a" />
-              <circle cx="48" cy="24" r="3" fill="#1a1a1a" />
-              {/* Shine (Top right of pupils: 25 and 49) */}
-              <circle cx="25" cy="22" r="1.2" fill="#fff" />
-              <circle cx="49" cy="22" r="1.2" fill="#fff" />
+              {/* Whites */}
+              <ellipse cx="24" cy="23" rx="5.5" ry="6" fill="#fff" />
+              <ellipse cx="40" cy="23" rx="5.5" ry="6" fill="#fff" />
+              {/* Pupils */}
+              <circle cx="26" cy="24" r="2.8" fill="#1a1a1a" />
+              <circle cx="42" cy="24" r="2.8" fill="#1a1a1a" />
+              {/* Shine */}
+              <circle cx="27" cy="22" r="1.2" fill="#fff" />
+              <circle cx="43" cy="22" r="1.2" fill="#fff" />
             </>
           )}
 
-          {/* Mouth (Shifted +2px right) */}
+          {/* Mouth */}
           {jump ? (
-            <path d="M 30 33 Q 34 38 38 33" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
+            <path d="M 30 33 Q 32 37 34 33" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
           ) : (
-            <path d="M 32 33 Q 34 35 36 33" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+            <path d="M 30 33 Q 32 35 34 33" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
           )}
 
-          {/* Blush (Shifted +2px right) */}
-          <circle cx="14" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
-          <circle cx="54" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
+          {/* Blush */}
+          <circle cx="16" cy="29" r="4" fill="#ff6b6b" opacity="0.25" />
+          <circle cx="48" cy="29" r="4" fill="#ff6b6b" opacity="0.25" />
         </svg>
       </div>
 
