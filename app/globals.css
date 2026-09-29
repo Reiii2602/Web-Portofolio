@@ -22,7 +22,12 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 a { color: inherit; text-decoration: none; }
 a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
 .site-header, .section-shell, .site-footer { width: min(100% - 48px, 1240px); margin-inline: auto; }
-.site-header { display: flex; align-items: center; justify-content: space-between; height: 88px; border-bottom: 1px solid var(--border); }
+.site-header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; height: 88px; border-bottom: 1px solid var(--border); background: rgba(247,247,245,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.header-left { display: flex; align-items: center; gap: 16px; }
+.lang-switch { display: flex; align-items: center; gap: 2px; background: none; border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 11px; font-family: inherit; letter-spacing: .04em; color: var(--muted-foreground); transition: border-color .2s ease; }
+.lang-switch:hover { border-color: var(--foreground); }
+.lang-divider { margin: 0 2px; }
+.lang-active { color: var(--foreground); font-weight: 700; }
 .wordmark { font-size: 12px; font-weight: 700; letter-spacing: .08em; }
 .desktop-nav { display: flex; gap: 32px; margin-left: 84px; color: var(--muted-foreground); }
 .desktop-nav a, .header-link, .text-link, .site-footer a { transition: color .2s ease; }
