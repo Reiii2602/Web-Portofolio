@@ -42,9 +42,8 @@ function PageContent() {
         <div className="header-left">
           <a className="wordmark" href="#top" aria-label="Back to top">DAFFA.</a>
           <button className="lang-switch" onClick={toggle} aria-label="Switch language">
-            <span className={lang === 'en' ? 'lang-active' : ''}>EN</span>
-            <span className="lang-divider">/</span>
-            <span className={lang === 'id' ? 'lang-active' : ''}>ID</span>
+            <span className={lang === 'en' ? 'lang-active lang-en' : ''}>EN</span>
+            <span className={lang === 'id' ? 'lang-active lang-id' : ''}>ID</span>
           </button>
         </div>
         <nav className="desktop-nav" aria-label="Main navigation">
