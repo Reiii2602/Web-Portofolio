@@ -3,6 +3,7 @@
 import PhotoCarousel from '@/components/PhotoCarousel'
 import Pet from '@/components/Pet'
 import SocialSidebar from '@/components/SocialSidebar'
+import ThemeToggle from '@/components/ThemeToggle'
 import { LangProvider, useLang } from '@/components/LangContext'
 
 const projects = [
@@ -47,6 +48,7 @@ function PageContent() {
             <span className={lang === 'en' ? 'lang-active lang-en' : ''}>EN</span>
             <span className={lang === 'id' ? 'lang-active lang-id' : ''}>ID</span>
           </button>
+          <ThemeToggle />
         </div>
         <nav className="desktop-nav" aria-label="Main navigation">
           <a href="#work">{t.work}</a>

@@ -153,43 +153,43 @@ export default function Pet() {
 
           {/* Left leg */}
           <g className={isWalking ? 'pet-leg-l' : ''}>
-            <rect x="16" y="42" width="12" height="14" rx="5" fill="#1a1a1a" />
-            <ellipse cx="22" cy="55" rx="7.5" ry="4.5" fill="#1a1a1a" />
+            <rect x="16" y="42" width="12" height="14" rx="5" fill="var(--foreground)" />
+            <ellipse cx="22" cy="55" rx="7.5" ry="4.5" fill="var(--foreground)" />
           </g>
           {/* Right leg */}
           <g className={isWalking ? 'pet-leg-r' : ''}>
-            <rect x="36" y="42" width="12" height="14" rx="5" fill="#1a1a1a" />
-            <ellipse cx="42" cy="55" rx="7.5" ry="4.5" fill="#1a1a1a" />
+            <rect x="36" y="42" width="12" height="14" rx="5" fill="var(--foreground)" />
+            <ellipse cx="42" cy="55" rx="7.5" ry="4.5" fill="var(--foreground)" />
           </g>
 
           {/* Body */}
-          <ellipse cx="32" cy="28" rx="22" ry="22" fill="#1a1a1a" />
+          <ellipse cx="32" cy="28" rx="22" ry="22" fill="var(--foreground)" />
 
           {/* Eyes (Perfectly centered, looking right) */}
           {blink ? (
             <>
-              <line x1="20" y1="24" x2="28" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="36" y1="24" x2="44" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="20" y1="24" x2="28" y2="24" stroke="var(--background)" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="36" y1="24" x2="44" y2="24" stroke="var(--background)" strokeWidth="2.5" strokeLinecap="round" />
             </>
           ) : (
             <>
               {/* Whites */}
-              <ellipse cx="24" cy="23" rx="5.5" ry="6" fill="#fff" />
-              <ellipse cx="40" cy="23" rx="5.5" ry="6" fill="#fff" />
+              <ellipse cx="24" cy="23" rx="5.5" ry="6" fill="var(--background)" />
+              <ellipse cx="40" cy="23" rx="5.5" ry="6" fill="var(--background)" />
               {/* Pupils */}
-              <circle cx="26" cy="24" r="2.8" fill="#1a1a1a" />
-              <circle cx="42" cy="24" r="2.8" fill="#1a1a1a" />
+              <circle cx="26" cy="24" r="2.8" fill="var(--foreground)" />
+              <circle cx="42" cy="24" r="2.8" fill="var(--foreground)" />
               {/* Shine */}
-              <circle cx="27" cy="22" r="1.2" fill="#fff" />
-              <circle cx="43" cy="22" r="1.2" fill="#fff" />
+              <circle cx="27" cy="22" r="1.2" fill="var(--background)" />
+              <circle cx="43" cy="22" r="1.2" fill="var(--background)" />
             </>
           )}
 
           {/* Mouth */}
           {jump ? (
-            <path d="M 30 33 Q 32 37 34 33" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
+            <path d="M 30 33 Q 32 37 34 33" stroke="var(--background)" strokeWidth="2" fill="none" strokeLinecap="round" />
           ) : (
-            <path d="M 30 33 Q 32 35 34 33" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+            <path d="M 30 33 Q 32 35 34 33" stroke="var(--background)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
           )}
 
           {/* Blush */}
