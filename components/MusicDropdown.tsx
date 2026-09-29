@@ -19,18 +19,20 @@ export default function MusicDropdown() {
   const [isOpen, setIsOpen] = useState(false)
   const [url, setUrl] = useState('')
   const [embedUrl, setEmbedUrl] = useState('')
+  const [isMounted, setIsMounted] = useState(false)
 
   // Set random track on mount
   useEffect(() => {
     const randomTrack = RANDOM_TRACKS[Math.floor(Math.random() * RANDOM_TRACKS.length)]
     setEmbedUrl(`https://open.spotify.com/embed/${randomTrack}?utm_source=generator&theme=0`)
+    setIsMounted(true)
   }, [])
 
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value
     setUrl(val)
 
-    const match = val.match(/spotify\.com\/(playlist|track|album|show|episode)\/([a-zA-Z0-9]+)/)
+    const match = val.match(/(track|playlist|album|show|episode)\/([a-zA-Z0-9]+)/)
     if (match) {
       setEmbedUrl(`https://open.spotify.com/embed/${match[1]}/${match[2]}?utm_source=generator&theme=0`)
       // Close input after successful paste
@@ -62,7 +64,7 @@ export default function MusicDropdown() {
         )}
       </div>
 
-      {embedUrl && (
+      {isMounted && embedUrl && (
         <div className="floating-music-player">
           <iframe
             src={embedUrl}
