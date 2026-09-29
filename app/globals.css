@@ -109,8 +109,8 @@ em { font-family: var(--font-serif); font-weight: 400; }
 .social-sidebar { position: fixed; top: 50%; left: 0; transform: translateY(-50%); z-index: 95; }
 .social-panel { display: flex; flex-direction: column; gap: 20px; background: rgba(247,247,245,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 24px 16px; border: 1px solid var(--border); border-left: none; border-radius: 0 12px 12px 0; transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 4px 0 15px rgba(0,0,0,0.05); position: relative; }
 .social-sidebar.open .social-panel { transform: translateX(0); }
-.social-panel a { color: var(--foreground); transition: opacity 0.2s, transform 0.2s; display: block; }
-.social-panel a:hover { opacity: 0.6; transform: scale(1.1); }
+.social-panel a { color: var(--muted-foreground); transition: color 0.2s, transform 0.2s; display: block; }
+.social-panel a:hover { color: var(--foreground); transform: scale(1.1); }
 .social-toggle { position: absolute; left: 100%; top: 50%; transform: translateY(-50%); width: 40px; height: 60px; background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: flex-start; outline: none; padding-left: 8px; }
 .social-toggle svg { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .social-sidebar.open .social-toggle svg { transform: rotate(180deg); }
