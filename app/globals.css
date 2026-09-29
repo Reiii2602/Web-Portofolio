@@ -56,15 +56,13 @@ em { font-family: var(--font-serif); font-weight: 400; }
 .project-visual--objects { background: #bcbcb7; }.project-visual--objects i { width: 20%; border-radius: 0; transform: rotate(45deg); background: #f7f7f5; }
 .project-meta { display: grid; grid-template-columns: 40px 1fr auto 20px; gap: 18px; align-items: start; padding-top: 16px; }.project-number, .project-year, .project-arrow { color: var(--muted-foreground); font-size: 11px; }.project-meta h2 { margin: 0 0 4px; font-size: 21px; font-weight: 500; letter-spacing: -.03em; }.project-meta p { margin: 0; text-transform: none; letter-spacing: 0; }
 .about-section { padding-bottom: 110px; }.about-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5%; align-items: start; }.about-grid h2 { font-size: clamp(3rem, 6vw, 6rem); }.about-copy { max-width: 360px; padding-top: 6px; }.about-copy p { margin: 0 0 22px; font-size: 16px; line-height: 1.55; }.principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; border-top: 1px solid var(--border); margin-top: 100px; padding-top: 18px; }.principle span { color: var(--muted-foreground); font-size: 11px; }.principle h3 { margin: 38px 0 9px; font-size: 15px; font-weight: 600; }.principle p { max-width: 260px; margin: 0; color: var(--muted-foreground); line-height: 1.6; }
-.photo-carousel { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.photo-frame { position: relative; width: 100%; max-width: 300px; aspect-ratio: 3/4; }
-.photo-container { position: relative; width: 100%; height: 100%; clip-path: url(#frame-clip); border-radius: 12px; overflow: hidden; }
-.photo-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease-in-out; }
-.photo-slide.photo-active { opacity: 1; }
-.photo-dots { display: flex; gap: 8px; }
-.photo-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--foreground); background: transparent; cursor: pointer; padding: 0; transition: background 0.3s ease, transform 0.2s ease; }
-.photo-dot:hover { transform: scale(1.3); }
-.photo-dot-active { background: var(--foreground); }
+.photo-stack { position: relative; width: 240px; height: 310px; cursor: pointer; margin: 0 auto; }
+.photo-card { position: absolute; width: 200px; height: 270px; border-radius: 6px; background: #fff; padding: 10px 10px 30px; box-shadow: 0 2px 12px rgba(0,0,0,.12), 0 1px 3px rgba(0,0,0,.08); transition: transform 0.4s cubic-bezier(.4,0,.2,1), box-shadow 0.3s ease; }
+.photo-card img { width: 100%; height: 100%; object-fit: cover; border-radius: 3px; pointer-events: none; user-select: none; }
+.photo-back { top: 10px; left: 10px; transform: rotate(-2deg); z-index: 1; }
+.photo-front { top: 5px; left: 20px; transform: rotate(6deg); z-index: 2; }
+.photo-stack:hover .photo-front { transform: rotate(8deg) translateY(-12px); box-shadow: 0 8px 28px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.1); }
+.photo-stack:active .photo-front { transform: rotate(4deg) translateY(-6px) scale(0.97); transition-duration: 0.15s; }
 .contact-section { padding: 110px 0 130px; border-top: 1px solid var(--foreground); }.contact-section h2 { font-size: clamp(4rem, 9vw, 9rem); margin: 55px 0 76px; }.contact-email { display: inline-flex; border-bottom: 1px solid var(--foreground); padding-bottom: 8px; font-size: 18px; }
 .site-footer { display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding: 22px 0 30px; color: var(--muted-foreground); font-size: 11px; }.site-footer div { display: flex; gap: 24px; }
 @media (max-width: 700px) { .site-header, .section-shell, .site-footer { width: min(100% - 32px, 1240px); }.site-header { height: 70px; }.desktop-nav { display: none; }.hero { min-height: 610px; padding-top: 64px; padding-bottom: 52px; }.hero-bottom, .about-grid { grid-template-columns: 1fr; gap: 28px; }.availability { text-align: left; }.hero-actions { flex-wrap: wrap; }.section-heading { display: block; }.section-note { margin-top: 10px; }.work-section, .about-section { padding-top: 72px; }.project-visual { height: 300px; }.project-meta { grid-template-columns: 28px 1fr 20px; }.project-year { display: none; }.principles { grid-template-columns: 1fr; gap: 30px; margin-top: 64px; }.principle h3 { margin-top: 14px; }.contact-section { padding: 74px 0 90px; }.contact-section h2 { margin: 40px 0 55px; }.site-footer { display: block; }.site-footer div { margin-top: 18px; gap: 16px; } }
