@@ -92,8 +92,6 @@ em { font-family: var(--font-serif); font-weight: 400; }
 .pet-wrap { position: fixed; bottom: -2px; z-index: 90; cursor: pointer; transition: left 0.02s linear; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); }
 .pet-body { display: block; overflow: visible; }
 .pet-flipped { transform: scaleX(-1); }
-.pet-wrap:hover .pet-body { transform: translateY(-3px); transition: transform 0.25s ease; }
-.pet-wrap:hover .pet-flipped { transform: scaleX(-1) translateY(-3px); }
 /* Legs walking */
 .pet-leg-l { animation: legL 0.35s ease-in-out infinite; transform-origin: 22px 48px; }
 .pet-leg-r { animation: legR 0.35s ease-in-out infinite; transform-origin: 42px 48px; }
