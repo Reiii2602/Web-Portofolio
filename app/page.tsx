@@ -1,3 +1,5 @@
+import PhotoCarousel from '@/components/PhotoCarousel'
+
 const projects = [
   {
     number: '01',
@@ -68,7 +70,7 @@ export default function Page() {
 
       <section id="about" className="about-section section-shell">
         <div className="section-heading"><p className="eyebrow">About</p><p className="section-note">Who I am</p></div>
-        <div className="about-grid"><h2>Driven by<br /><em>curiosity.</em></h2><div className="about-copy"><p>I am Daffa Fadhul Rahman, a vocational high school student majoring in SIJA (Sistem Informasi, Jaringan, dan Aplikasi) at SMKN 2 Yogyakarta.</p><p>My core focus lies in designing, securing, and troubleshooting robust network infrastructures and Linux/Windows server environments, while actively expanding my capabilities into Full-Stack web development and IoT hardware engineering.</p></div></div>
+        <div className="about-grid"><h2>Driven by<br /><em>curiosity.</em></h2><PhotoCarousel /><div className="about-copy"><p>I am Daffa Fadhul Rahman, a vocational high school student majoring in SIJA (Sistem Informasi, Jaringan, dan Aplikasi) at SMKN 2 Yogyakarta.</p><p>My core focus lies in designing, securing, and troubleshooting robust network infrastructures and Linux/Windows server environments, while actively expanding my capabilities into Full-Stack web development and IoT hardware engineering.</p></div></div>
         <div className="principles">{principles.map(([number, title, copy]) => <div className="principle" key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></div>)}</div>
       </section>
 
