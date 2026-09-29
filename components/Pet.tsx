@@ -137,36 +137,36 @@ export default function Pet() {
           {/* Body */}
           <ellipse cx="32" cy="28" rx="22" ry="22" fill="#1a1a1a" />
 
-          {/* Eyes (Symmetric, looking right by default) */}
+          {/* Eyes (Looking right: entire face shifted +2px right) */}
           {blink ? (
             <>
-              <line x1="16" y1="24" x2="24" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="40" y1="24" x2="48" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="18" y1="24" x2="26" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="42" y1="24" x2="50" y2="24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
             </>
           ) : (
             <>
-              {/* White part (Centers: 20 and 44) */}
-              <ellipse cx="20" cy="23" rx="6" ry="6.5" fill="#fff" />
-              <ellipse cx="44" cy="23" rx="6" ry="6.5" fill="#fff" />
-              {/* Pupils (Centers: 22 and 46) */}
-              <circle cx="22" cy="24" r="3" fill="#1a1a1a" />
-              <circle cx="46" cy="24" r="3" fill="#1a1a1a" />
-              {/* Shine */}
-              <circle cx="21" cy="22" r="1.2" fill="#fff" />
-              <circle cx="45" cy="22" r="1.2" fill="#fff" />
+              {/* White part (Centers: 22 and 46) */}
+              <ellipse cx="22" cy="23" rx="6" ry="6.5" fill="#fff" />
+              <ellipse cx="46" cy="23" rx="6" ry="6.5" fill="#fff" />
+              {/* Pupils (Centers: 24 and 48) */}
+              <circle cx="24" cy="24" r="3" fill="#1a1a1a" />
+              <circle cx="48" cy="24" r="3" fill="#1a1a1a" />
+              {/* Shine (Top right of pupils: 25 and 49) */}
+              <circle cx="25" cy="22" r="1.2" fill="#fff" />
+              <circle cx="49" cy="22" r="1.2" fill="#fff" />
             </>
           )}
 
-          {/* Mouth (Center: 32) */}
+          {/* Mouth (Shifted +2px right) */}
           {jump ? (
-            <path d="M 28 33 Q 32 38 36 33" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
+            <path d="M 30 33 Q 34 38 38 33" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
           ) : (
-            <path d="M 30 33 Q 32 35 34 33" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+            <path d="M 32 33 Q 34 35 36 33" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
           )}
 
-          {/* Blush (Centers: 12 and 52) */}
-          <circle cx="12" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
-          <circle cx="52" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
+          {/* Blush (Shifted +2px right) */}
+          <circle cx="14" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
+          <circle cx="54" cy="30" r="4" fill="#ff6b6b" opacity="0.2" />
         </svg>
       </div>
 
