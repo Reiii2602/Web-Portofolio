@@ -105,6 +105,16 @@ em { font-family: var(--font-serif); font-weight: 400; }
 }
 /* Jump on click */
 .pet-jump { animation: petJump 0.5s cubic-bezier(.2,0,.3,1); }
+/* Social Sidebar */
+.social-sidebar { position: fixed; top: 50%; left: 0; transform: translateY(-50%); z-index: 95; }
+.social-panel { display: flex; flex-direction: column; gap: 20px; background: var(--foreground); padding: 24px 16px; border-radius: 0 12px 12px 0; transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 4px 0 15px rgba(0,0,0,0.1); position: relative; }
+.social-sidebar.open .social-panel { transform: translateX(0); }
+.social-panel a { color: var(--background); transition: opacity 0.2s, transform 0.2s; display: block; }
+.social-panel a:hover { opacity: 0.7; transform: scale(1.1); }
+.social-toggle { position: absolute; left: 100%; top: 50%; transform: translateY(-50%); width: 40px; height: 60px; background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: flex-start; outline: none; padding-left: 8px; }
+.social-toggle svg { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.social-sidebar.open .social-toggle svg { transform: rotate(180deg); }
+
 @keyframes petJump {
   0% { transform: translateY(0); }
   35% { transform: translateY(-20px) scaleY(1.1); }

@@ -2,6 +2,7 @@
 
 import PhotoCarousel from '@/components/PhotoCarousel'
 import Pet from '@/components/Pet'
+import SocialSidebar from '@/components/SocialSidebar'
 import { LangProvider, useLang } from '@/components/LangContext'
 
 const projects = [
@@ -52,7 +53,7 @@ function PageContent() {
           <a href="#about">{t.about}</a>
           <a href="#contact">{t.contact}</a>
         </nav>
-        <a className="header-link" href="https://wa.me/6288215748241" target="_blank" rel="noopener noreferrer">{t.letsTalk} <span aria-hidden="true">↗</span></a>
+        <a className="header-link" href="#" onClick={(e) => e.preventDefault()}>{t.letsTalk} <span aria-hidden="true">↗</span></a>
       </header>
 
       <section id="top" className="hero section-shell">
@@ -88,8 +89,9 @@ function PageContent() {
 
       <section id="contact" className="contact-section section-shell"><p className="eyebrow">{t.contactPrompt}</p><h2>{t.contactTitle1}<br /><em>{t.contactTitle2}</em></h2><a className="contact-email" href="mailto:daffasierra2620@gmail.com">daffasierra2620@gmail.com <span aria-hidden="true">↗</span></a></section>
 
-      <footer className="site-footer"><span>{t.copyright}</span><div><a href="https://wa.me/6288215748241" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/dappa.jpg?igsh=amZ5cmR4NHh3N2E0" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.linkedin.com/in/daffa-fadhul-rahman-4715723a7?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="#top">{t.backToTop}</a></div></footer>
+      <footer className="site-footer"><span>{t.copyright}</span><div><a href="https://www.instagram.com/dappa.jpg?igsh=amZ5cmR4NHh3N2E0" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.linkedin.com/in/daffa-fadhul-rahman-4715723a7" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/Reiii2602" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.tiktok.com/@reishiroo_" target="_blank" rel="noopener noreferrer">TikTok</a><a href="#top">{t.backToTop}</a></div></footer>
       <Pet />
+      <SocialSidebar />
     </main>
   )
 }
