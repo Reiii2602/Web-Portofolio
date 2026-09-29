@@ -5,6 +5,10 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Daffa Fadhul Rahman — Portfolio',
   description: 'SIJA student at SMKN 2 Yogyakarta specializing in network infrastructure, full-stack development, and IoT engineering.',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/apple-icon.png',
+  },
 }
 
 export const viewport: Viewport = {
