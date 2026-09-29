@@ -21,7 +21,7 @@ export default function SocialSidebar() {
         </a>
 
         <button className="social-toggle" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle social links">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="red" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(108, 108, 104, 0.7)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
