@@ -115,34 +115,6 @@ em { font-family: var(--font-serif); font-weight: 400; }
 .social-toggle svg { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .social-sidebar.open .social-toggle svg { transform: rotate(180deg); }
 
-/* Music Inline & Floating Player */
-.music-inline-container { display: flex; align-items: center; gap: 24px; }
-.music-nav-btn { background: none; border: none; padding: 0; font-family: inherit; font-size: inherit; font-weight: inherit; color: inherit; cursor: pointer; transition: color 0.2s ease; }
-.music-nav-btn:hover, .music-nav-btn.active { color: var(--foreground); }
-.music-inline-content { display: flex; align-items: center; animation: slideInRight 0.3s ease forwards; }
-.music-inline-input { width: 280px; height: 42px; padding: 0 18px; border: none; border-radius: 21px; background: #e3e3de; color: #111; font-family: inherit; font-size: 13px; outline: none; transition: background 0.2s; }
-.music-inline-input::placeholder { color: #888; }
-.music-inline-input:focus { background: #dcdcd6; }
-
-.floating-music-player {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 90;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  animation: slideUpFade 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(-10px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-@keyframes slideUpFade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 
 @keyframes petJump {
   0% { transform: translateY(0); }
