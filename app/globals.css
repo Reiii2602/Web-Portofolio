@@ -115,14 +115,22 @@ em { font-family: var(--font-serif); font-weight: 400; }
 .social-toggle svg { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .social-sidebar.open .social-toggle svg { transform: rotate(180deg); }
 
-/* Music Dropdown */
-.music-dropdown-container { position: relative; display: inline-block; }
+/* Music Inline */
+.music-inline-container { display: flex; align-items: center; gap: 24px; }
 .music-nav-btn { background: none; border: none; padding: 0; font-family: inherit; font-size: inherit; font-weight: inherit; color: inherit; cursor: pointer; transition: color 0.2s ease; }
 .music-nav-btn:hover, .music-nav-btn.active { color: var(--foreground); }
-.music-popover { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 16px; background: rgba(247,247,245,.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border); padding: 12px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 320px; z-index: 200; display: flex; flex-direction: column; gap: 12px; }
-.music-input { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: #fff; color: #111; font-family: inherit; font-size: 13px; outline: none; transition: border-color 0.2s; }
-.music-input:focus { border-color: var(--foreground); }
-.music-player { width: 100%; border-radius: 12px; overflow: hidden; background: #111; display: flex; }
+.music-inline-content { display: flex; align-items: center; animation: slideInRight 0.3s ease forwards; }
+.music-inline-input { width: 260px; height: 42px; padding: 0 18px; border: none; border-radius: 21px; background: #e3e3de; color: #111; font-family: inherit; font-size: 13px; outline: none; transition: background 0.2s; }
+.music-inline-input::placeholder { color: #888; }
+.music-inline-input:focus { background: #dcdcd6; }
+.music-inline-player { display: flex; align-items: center; gap: 10px; }
+.music-clear-btn { background: #e3e3de; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #111; font-size: 14px; transition: background 0.2s; }
+.music-clear-btn:hover { background: #dcdcd6; }
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
 @keyframes petJump {
   0% { transform: translateY(0); }

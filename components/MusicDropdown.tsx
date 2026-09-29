@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { useLang } from './LangContext'
 
 export default function MusicDropdown() {
@@ -7,9 +7,7 @@ export default function MusicDropdown() {
   const [isOpen, setIsOpen] = useState(false)
   const [url, setUrl] = useState('')
   const [embedUrl, setEmbedUrl] = useState('')
-  const popoverRef = useRef<HTMLDivElement>(null)
 
-  // Parse Spotify URL to Embed URL
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value
     setUrl(val)
@@ -22,21 +20,8 @@ export default function MusicDropdown() {
     }
   }
 
-  // Close when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
-      }
-    }
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [isOpen])
-
   return (
-    <div className="music-dropdown-container" ref={popoverRef}>
+    <div className="music-inline-container">
       <button 
         className={`music-nav-btn ${isOpen ? 'active' : ''}`} 
         onClick={() => setIsOpen(!isOpen)}
@@ -45,26 +30,34 @@ export default function MusicDropdown() {
       </button>
 
       {isOpen && (
-        <div className="music-popover">
-          <input
-            type="text"
-            placeholder={t.musicPlaceholder}
-            value={url}
-            onChange={handleUrlChange}
-            className="music-input"
-            autoFocus
-          />
-          {embedUrl && (
-            <div className="music-player">
+        <div className="music-inline-content">
+          {!embedUrl ? (
+            <input
+              type="text"
+              placeholder={t.musicPlaceholder}
+              value={url}
+              onChange={handleUrlChange}
+              className="music-inline-input"
+              autoFocus
+            />
+          ) : (
+            <div className="music-inline-player">
               <iframe
                 src={embedUrl}
-                width="100%"
-                height="152"
+                width="300"
+                height="80"
                 frameBorder="0"
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
-                style={{ borderRadius: '12px' }}
+                style={{ borderRadius: '12px', background: 'transparent' }}
               />
+              <button 
+                className="music-clear-btn" 
+                onClick={() => { setUrl(''); setEmbedUrl(''); }} 
+                title="Clear Music"
+              >
+                ✕
+              </button>
             </div>
           )}
         </div>
